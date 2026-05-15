@@ -94,6 +94,7 @@ async function difficultySelection(difficulty) {
         let pos = Math.floor(Math.random() * cards.length);
         $(this).css("order", pos);
     });
+    lockBoard = false;
 }
 
 function updateUI(){
@@ -109,7 +110,7 @@ function setBanner(difficulty){
   count = 30;
   powerUpUsed = false;
   timer = null;
-  
+
    powerUpButton.disabled = false;
   $(powerUpButton).removeClass("btn-secondary").addClass("btn-warning");
 
