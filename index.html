@@ -12,19 +12,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </head>
-<!-- Main Navbar Wrapper -->
-<div class="container mt-3 position-relative">
-    
-    <!-- Top Navbar (Red Section) -->
+<body>
+<div class="container mt-1 position-relative">
     <header class="d-flex flex-wrap align-items-center justify-content-between py-3 bg-danger text-white px-3 rounded-top border-bottom border-dark border-3">
-        
-        <!-- Left Side: Title & Logo -->
         <a href="#" class="d-flex align-items-center pe-5 link-light text-decoration-none z-3" style="cursor: default;">
             <img src="pokeball.png" alt="Logo" width="40" height="40" class="me-3">
             <span class="fs-4 fw-bold text-nowrap">PokeMix and Match</span>
         </a>
-        
-        <!-- Right Side: Difficulty Buttons -->
         <div class="z-3">
             <ul class="nav nav-pills">
                 <li class="nav-item"><button class="btn btn-light text-danger mx-1 fw-medium" id="easyDiff">Easy</button></li>
@@ -32,24 +26,22 @@
                 <li class="nav-item"><button class="btn btn-light text-danger mx-1 fw-medium" id="hardDiff">Hard</button></li>
             </ul>
         </div>
-        
     </header>
-
-    <!-- Bottom Navbar (White Section) -->
     <div id="banner">
-        <header class="d-flex align-items-center justify-content-center py-3 mb-4 bg-white text-danger px-3 rounded-bottom">
-            <span id="score" class="fs-4 fw-bold text-nowrap text-center text-dark">Matches: 0 / 0</span>
-        </header>
+    <header class="d-flex align-items-center justify-content-between position-relative py-3 mb-4 bg-white text-danger px-3 rounded-bottom">
+        <div class="d-flex align-items-center">
+            <button class="btn btn-light mx-2" id="startButton">Start</button>
+            <button class="btn btn-light mx-2" id="powerUpButton">Power Up!!</button>
+        </div>
+        <span id="score" class="position-absolute start-50 translate-middle-x fs-4 fw-bold text-nowrap text-dark">
+        Matches: 0 / 0
+        </span>
+        <button class="btn btn-light mx-2" id="resetButton">Reset</button>
+    </header>
     </div>
-
-    <!-- The Pokéball Center Button -->
     <div class="pokeball-center position-absolute start-50 translate-middle"></div>
 </div>
-
-
-
-<body>
-  <div id="game_grid"></div>
+<div id="game_grid"></div>
 </body>
     <script src="index.js"></script>
 </html>
