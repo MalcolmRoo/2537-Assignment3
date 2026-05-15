@@ -1,47 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-bs-theme="light"> <!-- Added default light theme here -->
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <!-- import jQuery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- import jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="container mt-1 position-relative">
-    <header class="d-flex flex-wrap align-items-center justify-content-between py-3 bg-danger text-white px-3 rounded-top border-bottom border-dark border-3">
-        <a href="#" class="d-flex align-items-center pe-5 link-light text-decoration-none z-3" style="cursor: default;">
-            <img src="pokeball.png" alt="Logo" width="40" height="40" class="me-3">
-            <span class="fs-4 fw-bold text-nowrap">PokeMix and Match</span>
-        </a>
-        <div class="z-3">
-            <ul class="nav nav-pills">
-                <li class="nav-item"><button class="btn btn-light text-danger mx-1 fw-medium" id="easyDiff">Easy</button></li>
-                <li class="nav-item"><button class="btn btn-light text-danger mx-1 fw-medium" id="medDiff">Medium</button></li>
-                <li class="nav-item"><button class="btn btn-light text-danger mx-1 fw-medium" id="hardDiff">Hard</button></li>
-            </ul>
+    <div class="container mt-1 position-relative">
+        <header class="d-flex flex-wrap align-items-center justify-content-between py-3 bg-danger text-white px-3 rounded-top border-bottom border-dark border-3">
+            <a href="#" class="d-flex align-items-center pe-5 link-light text-decoration-none z-3" style="cursor: default;">
+                <img src="pokeball.png" alt="Logo" width="40" height="40" class="me-3">
+                <span class="fs-4 fw-bold text-nowrap">PokeMix and Match</span>
+            </a>
+            <div class="z-3">
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><button class="btn btn-light text-danger mx-1 fw-medium" id="easyDiff">Easy</button></li>
+                    <li class="nav-item"><button class="btn btn-light text-danger mx-1 fw-medium" id="medDiff">Medium</button></li>
+                    <li class="nav-item"><button class="btn btn-light text-danger mx-1 fw-medium" id="hardDiff">Hard</button></li>
+                </ul>
+            </div>
+        </header>
+        <div id="banner">
+            <header class="d-flex align-items-center justify-content-between position-relative py-3 mb-4 bg-body-tertiary text-danger px-3 rounded-bottom shadow-sm">
+                <div class="d-flex align-items-center z-3">
+                    <button class="btn btn-light mx-2" id="startButton">Start</button>
+                    <button class="btn btn-warning mx-2" id="powerUpButton">Power Up!!</button>
+                </div>
+                <span id="score" class="position-absolute start-50 translate-middle-x fs-4 fw-bold text-nowrap text-body">
+                    Matches: 0 / 0
+                </span>
+                <div class="d-flex align-items-center z-3">
+                    <button class="btn btn-outline-secondary mx-2" id="themeToggleButton">🌙 Dark Mode</button>
+                    <button class="btn btn-light mx-2" id="resetButton">Reset</button>
+                </div>
+            </header>
         </div>
-    </header>
-    <div id="banner">
-    <header class="d-flex align-items-center justify-content-between position-relative py-3 mb-4 bg-white text-danger px-3 rounded-bottom">
-        <div class="d-flex align-items-center">
-            <button class="btn btn-light mx-2" id="startButton">Start</button>
-            <button class="btn btn-light mx-2" id="powerUpButton">Power Up!!</button>
-        </div>
-        <span id="score" class="position-absolute start-50 translate-middle-x fs-4 fw-bold text-nowrap text-dark">
-        Matches: 0 / 0
-        </span>
-        <button class="btn btn-light mx-2" id="resetButton">Reset</button>
-    </header>
+        <div class="pokeball-center position-absolute start-50 translate-middle"></div>
     </div>
-    <div class="pokeball-center position-absolute start-50 translate-middle"></div>
+    <div id="gameAlert" class="position-fixed top-50 start-50 translate-middle z-3 bg-body border border-3 border-dark rounded p-5 text-center shadow-lg" style="display: none; min-width: 300px;">
+    <h1 id="messageText" class="fw-bold mb-4"></h1>
+    <button class="btn btn-danger fw-bold px-4" onclick="document.getElementById('gameAlert').style.display = 'none'">Close</button>
 </div>
-<div id="game_grid"></div>
+    <div id="game_grid"></div>
 </body>
-    <script src="index.js"></script>
+<script src="index.js"></script>
 </html>

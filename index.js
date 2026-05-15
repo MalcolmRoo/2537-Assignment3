@@ -5,6 +5,7 @@ var hardButton = document.getElementById("hardDiff");
 var startButton = document.getElementById("startButton");
 var resetButton = document.getElementById("resetButton");
 var powerUpButton = document.getElementById("powerUpButton");
+var themeToggle = document.getElementById("themeToggleButton");
 
 const easy = 4;
 const medium = 6;
@@ -15,6 +16,7 @@ let difficulty = easy;
 let currentScore = 0;
 let count;
 let timer;
+let powerUpUsed = false;
 
 let firstCard = null;
 let secondCard = null;
@@ -105,6 +107,11 @@ function setBanner(difficulty){
   currentScore = 0;
   moves = 0;
   count = 30;
+  powerUpUsed = false;
+
+   powerUpButton.disabled = false;
+  $(powerUpButton).removeClass("btn-secondary").addClass("btn-warning");
+
    var score = document.getElementById("score");
   if(difficulty == easy) score.textContent = `Easy: ${currentScore}/${difficulty} | Moves: ${moves} | Timer: ${count}`;
   else if(difficulty == medium) score.textContent = `Medium: ${currentScore}/${difficulty} | Moves: ${moves} | Timer: ${count}`;
@@ -117,13 +124,18 @@ startButton.addEventListener("click", () => {
         timer = setInterval(function() {
         if(currentScore == difficulty){
             clearInterval(timer);
-            alert("You Win!");
+            document.getElementById("messageText").textContent = "🎉 YOU WIN! 🎉";
+            document.getElementById("messageText").className = "fw-bold mb-4 text-success";
+            document.getElementById("gameAlert").style.display = "block";
         }
         count--;
         updateUI();
         if (count <= 0) {
             clearInterval(timer);
-            alert("You Lose...");
+            lockBoard = true;
+            document.getElementById("messageText").textContent = "💥 YOU LOSE... 💥";
+            document.getElementById("messageText").className = "fw-bold mb-4 text-danger";
+            document.getElementById("gameAlert").style.display = "block";
         }
         }, 1000);
     }
@@ -139,10 +151,45 @@ resetButton.addEventListener("click", () => {
 });
 
 powerUpButton.addEventListener("click", () => {
-    if(timer){
-        
+    if(timer && !powerUpUsed){
+        powerUpUsed = true;
+        lockBoard = true;
+
+        powerUpButton.disabled = true;
+        $(powerUpButton).removeClass("btn-warning").addClass("btn-secondary");
+
+        const cardList = document.querySelectorAll('.card');
+        const cardArray = [...cardList];
+
+        for(let i = 0; i < cardArray.length; i++){ 
+            if(!$(cardArray[i]).hasClass("flip")){
+                $(cardArray[i]).addClass("flip");
+                
+                setTimeout(() => {
+                    $(cardArray[i]).removeClass("flip"); 
+                    if (i === cardArray.length - 1) {
+                        lockBoard = false; 
+                    }
+                }, 1000);
+            }
+        }
     }
-})
+});
+
+themeToggle.addEventListener("click", () => {
+    const htmlElement = document.documentElement;
+    const currentTheme = htmlElement.getAttribute("data-bs-theme");
+    
+    if (currentTheme === "dark") {
+        htmlElement.setAttribute("data-bs-theme", "light");
+        themeToggle.textContent = "🌙 Dark Mode";
+        themeToggle.className = "btn btn-outline-secondary mx-2";
+    } else {
+        htmlElement.setAttribute("data-bs-theme", "dark");
+        themeToggle.textContent = "☀️ Light Mode";
+        themeToggle.className = "btn btn-outline-light mx-2";
+    }
+});
 
 easyButton.addEventListener("click", () => {
   difficultySelection(easy);
