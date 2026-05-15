@@ -1,23 +1,111 @@
 body {
-  margin: 0px;
+    margin: 0;
+    padding: 0;
+    background-image: url('background.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
 }
 
-#game_grid {
-  border: 2px tomato solid;
-  width: 600px;
-  height: 400px;
+#tracker {
+  background-color: white;
+  width: 90%;
+  height: 5vh;
+
+}
+
+/* Base style for the interactive Pokéball center button */
+.pokeball-center {
+    top: 50%; /* Aligns directly horizontally on the split line */
+    margin-top: 2px; /* Micro-adjustment for the bottom header margin spacing */
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    border: 8px solid #212529; /* Deep black border matching Bootstrap dark colors */
+    border-radius: 50%;
+    z-index: 1050; /* Places it cleanly above text elements */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    cursor: default;
+    transition: transform 0.1s ease;
+}
+
+/* Inner button ring detailing */
+.pokeball-center::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    border: 3px solid #212529;
+    border-radius: 50%;
+    background-color: #ffffff;
+}
+
+/* Subtle click feedback effect */
+.pokeball-center:active {
+    transform: translate(-50%, -24%) scale(0.9);
+}
+
+
+#game_grid.easy, #game_grid.med, #game_grid.hard {
+  width: 50%;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
+  box-sizing: border-box; /* Includes border in width calculations */
 }
 
+#game_grid.easy { height: 40vh; margin-top: 12%; }
+#game_grid.med { height: 62vh; margin-top: 6%;}
+#game_grid.hard { height: 81vh; margin-top: -1%; }
 
+/* Fixed card layout */
 .card {
-  width: 33.3%;
   position: relative;
   transition: transform 1s;
   perspective: 1000px;
   transform-style: preserve-3d;
+  box-sizing: border-box;
+  padding: 5px; /* Creates spacing between cards without breaking grid */
+}
+
+/* Set specific widths and heights based on difficulty grid rows/columns */
+#game_grid.easy .card {
+  width: 25%;       /* 4 columns */
+  height: 50%;      /* 2 rows */
+}
+
+#game_grid.med .card {
+  width: 25%;       /* 4 columns */
+  height: 33.3%;      /* 3 rows */
+}
+
+#game_grid.hard .card {
+  width: 25%;
+  height: 25%;
+}
+
+/* Force images to fill the padded card container exactly */
+.front_face, .back_face {
+  position: absolute;
+  top: 5px;          /* Matches card padding */
+  left: 5px;         /* Matches card padding */
+  width: calc(100% - 10px); /* Adjusts for padding */
+  height: calc(100% - 10px); /* Adjusts for padding */
+  object-fit: contain;       /* Prevents Pokemon artwork distortion */
+  backface-visibility: hidden;
+}
+
+.flip { 
+  transform: rotateY(180deg); 
+}
+
+.front_face { 
+  transform: rotateY(180deg); 
 }
 
 
