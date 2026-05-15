@@ -23,7 +23,6 @@ let secondCard = null;
 let lockBoard = false;
 
 function setup() {
-    $(".card").off("click");
     $(".card").on("click", function () {
         if (lockBoard || $(this).hasClass("flip")) return;
         $(this).toggleClass("flip");
