@@ -108,7 +108,8 @@ function setBanner(difficulty){
   moves = 0;
   count = 30;
   powerUpUsed = false;
-
+  timer = null;
+  
    powerUpButton.disabled = false;
   $(powerUpButton).removeClass("btn-secondary").addClass("btn-warning");
 
